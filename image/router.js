@@ -1,5 +1,6 @@
 const Image = require("./Image");
 const express = require("express");
+const auth = require("../auth/middleware");
 // const { Router } = require("express");
 // const router = new Router();
 const router = express.Router();
@@ -12,7 +13,7 @@ router.get("/images", async (req, res, next) => {
     next(error);
   }
 });
-router.post("/images", async (req, res, next) => {
+router.post("/images", auth, async (req, res, next) => {
   try {
     if (!req.body.url || !req.body.title) {
       return res.status(400).send("wrong request!");
