@@ -12,5 +12,17 @@ router.get("/images", async (req, res, next) => {
     next(error);
   }
 });
+router.post("/images", async (req, res, next) => {
+  try {
+    if (!req.body.url || !req.body.title) {
+      return res.status(400).send("wrong request!");
+    } else {
+      const imagePost = await Image.create(req.body);
+      return res.json(imagePost);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
