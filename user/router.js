@@ -3,10 +3,10 @@ const bcrypt = require("bcrypt");
 const { Router } = require("express");
 const router = new Router();
 
-router.post("/user", async (req, res, next) => {
+router.post("/users", async (req, res, next) => {
   try {
     if (!req.body.email || !req.body.password) {
-      return res.status(400).send("wrong request!");
+      return res.status(400).send("Please supply an email and password");
     } else {
       const user = {
         email: req.body.email,
