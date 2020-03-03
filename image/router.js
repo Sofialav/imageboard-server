@@ -25,5 +25,18 @@ router.post("/images", auth, async (req, res, next) => {
     next(error);
   }
 });
-
+router.get("/users/:userId", async (req, res, next) => {
+  try {
+    const userImages = await Image.findAll({
+      where: { userId: req.params.userId }
+    });
+    if (userImages) {
+      return res.json(userImages);
+    } else {
+      return res.status(404).send("does not exist");
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 module.exports = router;
