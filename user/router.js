@@ -19,5 +19,15 @@ router.post("/users", async (req, res, next) => {
     next(error);
   }
 });
-
+router.get("/users", async (req, res, next) => {
+  try {
+    const users = await User.findAll();
+    const finalUsers = users.map(
+      user => (user = { id: user.id, email: user.email })
+    );
+    res.status(201).json(finalUsers);
+  } catch (error) {
+    next(error);
+  }
+});
 module.exports = router;
